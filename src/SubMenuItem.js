@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import MenuItem from './MenuItem'
+import MenuItemLink from './MenuItemLink'
 import {NavDropdown} from 'react-bootstrap'
 
 export default class SubMenuItem extends Component {
@@ -8,7 +8,7 @@ export default class SubMenuItem extends Component {
   menuItems = () => {
     const subMenuName = Object.keys(this.props.subMenuItem)[0]
     return Object.keys(this.props.subMenuItem[subMenuName]).map(
-      (name)=> < MenuItem menuItem={this.props.subMenuItem[subMenuName][name]} key={name} />)
+      (name)=> < MenuItemLink menuItem={this.props.subMenuItem[subMenuName][name]} key={name} />)
   }
 
   render(){
