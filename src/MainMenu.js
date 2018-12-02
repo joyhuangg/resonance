@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import MainMenuItem from './MainMenuItem'
-export default class MainMenu extends Component {
+import {Navbar, Nav} from 'react-bootstrap'
 
+export default class MainMenu extends Component {
 
   // convert records into a nested hash with keys of the main menu names
   getMenuItems = () => {
@@ -35,7 +36,7 @@ export default class MainMenu extends Component {
     return mainMenuItems
   }
 
-  // render main menu items 
+  // render main menu items
   mainMenuItems = () => {
     const menuItems = this.getMenuItems()
     return Object.keys(menuItems).map((item, i) => {
@@ -44,11 +45,20 @@ export default class MainMenu extends Component {
   }
 
   render(){
-
     return(
-      <div>
-        {this.mainMenuItems()}
-      </div>
+      <Navbar collapseOnSelect>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="#brand">Resonance</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            {this.mainMenuItems()}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     )
   }
 }

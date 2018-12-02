@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import MenuItem from './MenuItem'
+import {NavDropdown} from 'react-bootstrap'
 
 export default class SubMenuItem extends Component {
 
@@ -8,16 +9,13 @@ export default class SubMenuItem extends Component {
     const subMenuName = Object.keys(this.props.subMenuItem)[0]
     return Object.keys(this.props.subMenuItem[subMenuName]).map(
       (name)=> < MenuItem menuItem={this.props.subMenuItem[subMenuName][name]} key={name} />)
-
   }
+
   render(){
     return(
-      <div>
-        <h2>{Object.keys(this.props.subMenuItem)[0]}</h2>
-        <ul>
-          {this.menuItems()}
-        </ul>
-      </div>
+      <NavDropdown stacked eventKey={Object.keys(this.props.subMenuItem)[0]} title={Object.keys(this.props.subMenuItem)[0]} id="basic-nav-dropdown">
+        {this.menuItems()}
+      </NavDropdown>
     )
   }
 }

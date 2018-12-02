@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import SubMenuItem from './SubMenuItem'
 import MenuItem from './MenuItem'
-
+import {NavDropdown} from 'react-bootstrap'
 export default class MainMenuItem extends Component {
 
   // render sub menus or menu items depending on name
@@ -21,12 +21,9 @@ export default class MainMenuItem extends Component {
 
   render(){
     return(
-      <div>
-        <h1>{Object.keys(this.props.mainMenuItem)[0]}</h1>
-        <ul>
-          {this.subItems()}
-        </ul>
-      </div>
+      <NavDropdown collapseOnSelect eventKey={Object.keys(this.props.mainMenuItem)[0]} title={Object.keys(this.props.mainMenuItem)[0]} id="basic-nav-dropdown">
+        {this.subItems()}
+      </NavDropdown>
     )
   }
 }
