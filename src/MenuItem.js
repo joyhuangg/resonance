@@ -1,13 +1,9 @@
 import React, {Component} from 'react'
 export default class MenuItem extends Component {
 
-  state = {
-
-  }
-
   render(){
     return(
-      "Menu Item"
+      <li><a href={this.props.menuItem.fields.URL}>{this.props.menuItem.fields.Name}</a></li>
     )
   }
 }

@@ -2,25 +2,53 @@ import React, {Component} from 'react'
 import MainMenuItem from './MainMenuItem'
 export default class MainMenu extends Component {
 
-  state = {
 
+  // convert records into a nested hash with keys of the main menu names
+  getMenuItems = () => {
+    let mainMenuItems = {}
+    // for each Item
+    this.props.records[0].forEach(function(record) {
+
+        // if main menu string does not exist yet as a key in my object of main menu items
+        if (!Object.keys(mainMenuItems).includes(record.get('Main Menu'))) {
+          // add key pointing to empty object
+          mainMenuItems[`${record.get('Main Menu')}`] = {}
+        }
+
+
+        let mainMenuItem = mainMenuItems[`${record.get('Main Menu')}`]
+        // if just a regular item push to main menu items value with key of 'Empty'
+        if (!record.get(`Sub-menu`)){
+          mainMenuItem['Empty'] = record
+        }
+        // else if submenu item append it to the right submenu
+        else{
+          // if submenu string does not exist yet as a key in main menu item
+          if (!Object.keys(mainMenuItem).includes(record.get('Sub-menu'))) {
+            // add key pointing to empty object
+            mainMenuItem[`${record.get('Sub-menu')}`] = {}
+          }
+          let subMenuItem = mainMenuItem[`${record.get('Sub-menu')}`]
+          subMenuItem[`${record.get('Name')}`] = record
+        }
+    });
+    return mainMenuItems
   }
 
-  componentDidMount() {
-    // fetch all data from airtable
-    // for each Item
-    // if live === true
-    // if main menu does not exist yet in my array of main menu strings
-      // add string to main menu
-    // if submenu
-      // attach submenu to main menu if submenu not attached already
-      // add menu item to array
-
+  // render main menu items 
+  mainMenuItems = () => {
+    const menuItems = this.getMenuItems()
+    return Object.keys(menuItems).map((item, i) => {
+      return <MainMenuItem mainMenuItem={{[item]: menuItems[item]}} key={i}/>
+    })
   }
 
   render(){
+
     return(
-      "Main Menu"
+      <div>
+        {this.mainMenuItems()}
+      </div>
     )
   }
 }
